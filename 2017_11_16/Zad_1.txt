@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp17
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            string str = "Lorem - ipsum";
+            Stoss st = new Stoss(str);
+
+
+
+            Console.ReadKey();
+
+        }
+    }
+
+
+
+
+    class Stoss
+    {
+
+        string str;
+        char[] stos;
+        int elem;
+
+
+
+
+
+        public Stoss(string str)
+        {
+            this.str = str;
+            stos = new char[str.Length];
+            elem = 0;
+            stoss(str);
+        }
+
+
+        public void stoss(string str)
+        {
+
+            for (int d = 0; d < stos.Length; d++)
+            {
+
+                push(Convert.ToChar(str[d]));
+            }
+
+            
+
+            for (int x = 0; x < str.Length; x++)
+            {
+                Console.Write(pop());
+
+            }
+
+
+            void push(char n)
+            {
+
+
+                if ((elem >= 0) && (elem < stos.Length))
+                {
+                    stos[elem] = n;
+
+
+                    Console.WriteLine(stos[elem]);
+                    elem++;
+
+                }
+                else { Console.WriteLine(" "); }
+            }
+
+
+            char pop()
+            {
+
+                if (elem > 0)
+                {
+                    elem--;
+                    char z6 = stos[elem];
+                    stos[elem] = '0';
+                    return z6;
+                }
+
+                return '0';
+
+            }
+        }
+    }
+}

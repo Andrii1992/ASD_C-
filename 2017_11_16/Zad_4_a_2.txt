@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace tab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            int elem = 0;
+            int[] tmp = new int[7]; 
+            char[] tr = { '(', '3', '{', ')', '}','[',']' };
+            char[] stos = new char[tr.Length];
+
+           Console.WriteLine(licz(tr));
+
+            bool licz(char[] tab)
+            {
+
+                for (int r = 0; r < tab.Length; r++)
+                {
+
+                    if ((tab[r] == '{') || (tab[r] == '<') || (tab[r] == '(') || (tab[r] == '[') || (tab[r] == '}') || (tab[r] == '>') || (tab[r] == ')') || (tab[r] == ']'))
+                    {
+                        push(tab[r]);
+                    }
+                    
+
+                }
+                for (int r = 0; r < tmp.Length; r++)
+                {
+                    tmp[r] = 0;
+                }
+
+                    for (int r = 0; r < stos.Length; r++)
+                {
+                   
+                    switch (pop())
+                    {
+
+                        case '{': { tmp[0]++; break; }
+                        case '}': { tmp[1]++; break; }
+                        case '[': { tmp[2]++; break; }
+                        case ']': { tmp[3]++; break; }
+                        case '(': { tmp[4]++; break; }
+                        case ')': { tmp[5]++; break; }
+                    }
+
+                }
+                if (tmp[0] == tmp[1]) { tmp[6]++; }
+                if (tmp[2] == tmp[3]) { tmp[6]++; }
+                if (tmp[4] == tmp[5]) { tmp[6]++; }
+                if (tmp[6] == 3) { return true; }
+                return false;
+
+                }
+
+
+          
+
+            void push(char n)
+            {
+                if ((elem == 0) || (elem < stos.Length))
+                {
+                    
+                    stos[elem] = n;
+
+                    elem++;
+
+                }
+                else { Console.WriteLine("Stos pelny"); }
+            }
+            char pop()
+            {
+                if (elem > 0)
+                {
+
+                    --elem;
+
+                    char w = stos[elem] ;
+
+                    stos[elem] = '0';
+
+                    return w;
+
+                }
+                return '0';
+            }
+
+
+            Console.ReadKey();
+        }
+    }
+}

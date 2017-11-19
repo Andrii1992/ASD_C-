@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace tab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            char ter;
+            int elem = 0,sd = 0,y=0;
+            int[] tmp = new int[7];
+            char[] tr = { '[','{','(',')','}','(',')',']' };
+            List<char> stos = new List<char>();
+            char[] tr1 = { '{', '[', '{', '(', '}', ']', ')', '}' };
+            Console.WriteLine(licz(tr));
+            Console.WriteLine(licz(tr1));
+
+            bool licz(char[] tab)
+            {
+
+                for (int r = 0; r < tab.Length; r++)
+                {
+
+                    if ((tab[r] == '{') || (tab[r] == '<') || (tab[r] == '(') || (tab[r] == '['))
+                    {
+                        push(tab[r]);
+                        y++;
+                    }
+                    if ((tab[r] == '}') || (tab[r] == '>') || (tab[r] == ')') || (tab[r] == ']'))
+                    {
+                        ter = pop();
+                        if ((ter == '{') && (tab[r] == '}')) { sd++; }
+                        if ((ter == '(') && (tab[r] == ')')) { sd++; }
+                        if ((ter == '[') && (tab[r] == ']')) { sd++; }
+                        if ((ter == '<') && (tab[r] == '>')) { sd++; }                        
+                    }
+
+                }
+                if (y == sd) { return true; }
+
+
+                return false;
+                
+            }
+
+
+
+            void push(char n)
+            {
+                if ((elem >= 0) || (elem < tr.Length))
+                {
+
+                    stos.Add(n);
+
+                    elem++;
+
+                }
+                else { Console.WriteLine("Stos pelny"); }
+            }
+            char pop()
+            {
+                if (elem > 0)
+                {
+
+                    --elem;
+
+                    char w = stos[elem];
+
+                    stos.RemoveAt(elem);
+
+                    return w;
+
+                }
+                return '0';
+            }
+
+
+            Console.ReadKey();
+        }
+    }
+}

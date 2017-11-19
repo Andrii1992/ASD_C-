@@ -1,0 +1,169 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp20
+{
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            string str = "Ala ma kota";
+            Stoss st = new Stoss(str);
+
+
+
+            Console.ReadKey();
+
+        }
+    }
+
+
+
+    class Stoss
+    {
+
+        string str;
+        char[] stos, temp;
+        int Lizcz, TmLicz, rozm;
+        bool majak = true;
+
+
+
+
+
+        public Stoss(string str)
+        {
+
+            this.str = str;
+            temp = new char[str.Length];
+            skanuj();
+            print();
+
+        }
+
+        void print()
+        {
+
+            foreach (char te in temp)
+            {
+
+                Console.Write(te);
+            }
+
+        }
+        void skanuj()
+        {
+            int lew = 0;
+            for (int t = 0; t < str.Length; ++t)
+            {
+                if ((str[t] == ' '))
+                {
+                    char[] zeta = new char[t - lew];
+                    int y = 0;
+                    for (int r = lew; r < t; r++)
+                    {
+                        zeta[y] = str[r];
+                        y++;
+
+
+
+                    }
+                    Lizcz = 0;
+                    stoss(zeta);
+
+                    lew = t + 1;
+
+                }
+
+                if (t == str.Length - 1)
+                {
+                    char[] zeta = new char[t - lew + 1];
+                    int y = 0;
+                    for (int r = lew; r <= t; r++)
+                    {
+                        zeta[y] = str[r];
+                        y++;
+                        majak = false;
+
+                    }
+                    Lizcz = 0;
+                    stoss(zeta);
+                }
+
+
+
+            }
+
+
+        }
+
+
+        public void stoss(char[] str)
+        {
+            stos = new char[str.Length];
+
+            for (int d = 0; d < str.Length; d++)
+            {
+
+                push(str[d]);
+
+            }
+
+
+            rozm = stos.Length;
+
+
+
+            for (int x = 0; x < rozm; x++)
+            {
+
+                temp[TmLicz] = pop();
+
+
+                TmLicz++;
+                if ((majak) && (x == rozm - 1)) { temp[TmLicz] = ' '; TmLicz++; }
+
+
+            }
+
+        }
+        void push(char n)
+        {
+
+
+            if ((Lizcz >= 0) && (Lizcz < stos.Length))
+            {
+                stos[Lizcz] = n;
+
+                Lizcz++;
+
+            }
+
+        }
+
+
+        char pop()
+        {
+
+            if (Lizcz > 0)
+            {
+                Lizcz--;
+                char z6 = stos[Lizcz];
+                stos[Lizcz] = '0';
+
+                return z6;
+            }
+
+            return '0';
+
+        }
+
+    }
+
+}
+

@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp19
+{
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string ter;
+            int elem = 0, sd = 0, y = 0;
+            
+            List<string> stos = new List<string>();
+            string[] tr1 = { "<body>", "</body>", "<head>", "</head>","<html>", "</html>" };
+            string[] tr2 = { "</html>","<body>", "<head>", "</head>", "<html>", "</body>" };
+            Console.WriteLine(licz(tr1));
+            Console.WriteLine(licz(tr2));
+
+
+
+            bool licz(string[] tab)
+            {
+
+                for (int r = 0; r < tab.Length; r++)
+                {
+
+                    if ((tab[r] == "<body>") || (tab[r] == "<head>" )|| (tab[r] == "<html>"))
+                    {
+                        push(tab[r]);
+                        y++;
+                    }
+                    if ((tab[r] == "</body>") || (tab[r] == "</head>")|| (tab[r] == "</html>"))
+                    {
+                        ter = pop();
+
+
+                        if ((String.Compare(ter ,"<body>") == 0) && ((String.Compare(tab[r], "</body>") == 0))) { sd++; }
+                        if ((String.Compare(ter, "<head>") == 0) && ((String.Compare(tab[r], "</head>") == 0))) { sd++; }
+                        if ((String.Compare(ter, "<html>") == 0) && ((String.Compare(tab[r], "</html>") == 0))) { sd++; }
+
+
+                        
+                        
+                    }
+
+                }
+                
+
+                if (y == sd) { return true; }
+
+
+                return false;
+
+            }
+
+
+
+            void push(string n)
+            {
+                if ((elem >= 0) || (elem < tr1.Length))
+                {
+
+                    stos.Add(n);
+                    elem++;
+
+                }
+                else { Console.WriteLine("Stos pelny"); }
+            }
+            string pop()
+            {
+                if (elem > 0)
+                {
+
+                    --elem;
+
+                    string w = stos[elem];
+
+                    stos.RemoveAt(elem);
+
+                    return w;
+
+                }
+                return "0";
+            }
+
+
+            Console.ReadKey();
+        }
+    }
+}
+
